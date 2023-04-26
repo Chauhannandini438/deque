@@ -1,0 +1,176 @@
+import java.util.* ;
+import java.io.*; 
+public class Deque 
+{
+    // Initialize your data structure.
+    int q[];
+    int f,r;
+    int size;
+    int x;
+    public Deque(int n) 
+    {
+        // Write your code here.
+        size=n;
+        q=new int[n];
+        f=r=-1;
+
+    }
+
+    // Pushes 'X' in the front of the deque. Returns true if it gets pushed into the deque, and false otherwise.
+    public boolean pushFront(int x) 
+    {
+        // Write your code here.
+        if(isFull()==true)
+        {
+            return false;
+        }
+        if(f==-1)
+        {
+            f=0;
+            r=0;
+        }
+        else if(f==0)
+        {
+            f=size-1;
+        }
+        else
+        {
+            f=(f-1)%size;
+        }
+        q[f]=x;
+         return true;
+    }
+
+    // Pushes 'X' in the back of the deque. Returns true if it gets pushed into the deque, and false otherwise.
+    public boolean pushRear(int x) 
+    {
+        // Write your code here.
+        if(isFull()==true)
+        {
+            return false;
+        }
+        r=(r+1)%size;
+        if(f==-1)
+        {
+            f=0;
+        }
+        q[r]=x;
+        return true;
+    }
+
+    // Pops an element from the front of the deque. Returns -1 if the deque is empty, otherwise returns the popped element.
+    public int popFront() 
+    {
+        // Write your code here.
+        if(isEmpty()==true)
+        {
+            return -1;
+        }
+        x=q[f];
+
+        if(f==r)
+        {
+            f=-1;
+            r=-1;
+        }
+        else
+        {
+            if(f==size-1)
+            {
+                f=0;
+            }
+            else
+            {
+                
+                f=(f+1)%size;
+            }
+        }
+        
+        return x;
+        
+    }
+
+    // Pops an element from the back of the deque. Returns -1 if the deque is empty, otherwise returns the popped element.
+    public int popRear() 
+    {
+        // Write your code here.
+        if(isEmpty()==true)
+        {
+            return -1;
+        }
+        x=q[r];
+        if(f==r)
+        {
+            f=-1;
+            r=-1;
+        }
+        else
+        {
+            if(r==0)
+            {
+                r=size-1;
+            }
+            else
+            {
+                r=(r-1)%size;
+            }
+        }
+        
+        return x;
+    }
+
+// Returns the first element of the deque. If the deque is empty, it returns -1.
+    public int getFront() 
+    {
+        // Write your code here.
+        if(isEmpty()==true)
+        {
+            return -1;
+        }
+        else
+        {
+            return q[f];
+        }
+
+    }
+
+    // Returns the last element of the deque. If the deque is empty, it returns -1.
+    public int getRear() 
+    {
+        // Write your code here.
+        if(isEmpty()==true)
+        {
+            return -1;
+        }
+        else
+        {
+            return q[r];
+        }
+    }
+
+    // Returns true if the deque is empty. Otherwise returns false.
+    public boolean isEmpty() 
+    {
+        // Write your code here.
+        if(f==-1)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    // Returns true if the deque is full. Otherwise returns false.
+    public boolean isFull() 
+    {
+        // Write your code here.
+        if((r+1==f) || (f==0)&&(r==size-1))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
